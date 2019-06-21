@@ -13,7 +13,7 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):
-        return f"Movie {self.title} ({self.year})"
+        return f"{self.title} ({self.year})"
 
 class Tag(models.Model):
     # user = models.ForeignKey(User)
@@ -37,3 +37,6 @@ class Link(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     imbd_id = models.BigIntegerField()
     tmbd_id = models.BigIntegerField()
+
+    def __str__(self):
+        return f"Link {self.movie} - imbd: {self.imbd_id}, tmbd: {self.tmbd_id}"

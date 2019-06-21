@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'movies', views.MoviesViewSet)
 
 urlpatterns = [
-    path('movies/', views.movie_list, name='movie_list'),
+    path('movies', views.movie_list, name='movie_list'),
     path('movie/<int:movieId>', views.movie, name='movie'),
+    path('db', views.fetch_dataset, name='fetch'),
 ]

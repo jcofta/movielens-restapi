@@ -9,7 +9,7 @@ class Genre(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=200)
-    year = models.IntegerField()
+    year = models.IntegerField(null=True)
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):
@@ -44,8 +44,8 @@ class Rating(models.Model):
 
 class Link(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    imdb_id = models.BigIntegerField()
-    tmdb_id = models.BigIntegerField()
+    imdb_id = models.BigIntegerField(null=True)
+    tmdb_id = models.BigIntegerField(null=True)
 
     def __str__(self):
         return f"{self.imbd_id}"

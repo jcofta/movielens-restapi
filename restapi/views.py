@@ -6,6 +6,7 @@ from rest_framework import viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import MovieListSerializer, MovieSerializer
+from .dataset import fetch
 
 
 class MoviesViewSet(generics.ListAPIView):
@@ -40,4 +41,10 @@ def movie(request, movieId):
 
     serializer = MovieSerializer(movie, many=False)
     return Response(serializer.data)
-    
+
+@api_view(['POST'])
+def fetch_dataset(request):
+    if request.data['source'] == 'ml-latest-small':
+        fetch()
+        return Response('Dataset fetched successfully')
+    return Response('Failed fetching', status=status.HTTP_400_BAD_REQUEST)

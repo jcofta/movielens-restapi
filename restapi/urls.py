@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register(r'movies', views.MoviesViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
-    # path('/movies/', views.movies name='movies')
+    path('movies/', views.movie_list, name='movie_list'),
+    path('movie/<int:movieId>', views.movie, name='movie'),
 ]

@@ -15,9 +15,18 @@ class Movie(models.Model):
     def __str__(self):
         return f"{self.title} ({self.year})"
 
+    def score(self):
+        return self.rating_set.aggregate(score=models.Avg('value'))['score']
+
+    def link(self):
+        try:
+            return self.link_set.get().url()
+        except:
+            return None
+
 class Tag(models.Model):
     # user = models.ForeignKey(User)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='tag')
     name = models.CharField(max_length=50)
     time = models.DateTimeField()
 
@@ -35,8 +44,11 @@ class Rating(models.Model):
 
 class Link(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    imbd_id = models.BigIntegerField()
-    tmbd_id = models.BigIntegerField()
+    imdb_id = models.BigIntegerField()
+    tmdb_id = models.BigIntegerField()
 
     def __str__(self):
-        return f"Link {self.movie} - imbd: {self.imbd_id}, tmbd: {self.tmbd_id}"
+        return f"{self.imbd_id}"
+    
+    def url(self):
+        return f"https://www.imdb.com/title/tt{self.imdb_id:0>7}/"

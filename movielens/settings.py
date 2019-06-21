@@ -25,7 +25,9 @@ SECRET_KEY = '(p@(=wr9$6bjp0y7n^a#s2y5oxlz#e==tzz)n&y2oegdv^y7*x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'jcofta.pythonanywhere.com',
+]
 
 
 # Application definition
